@@ -1,16 +1,18 @@
 <template>
   <div>
     <category-bar @categorySelect="getNotes" ref="categoryBar"></category-bar>
-    <notes ref="notes"></notes>
+    <notes ref="notes" @editInfo="handledEditInfo" @addNote="handleAddNote" @updateInfo="getNotes" @editCategory="handleEditCategory"></notes>
+    <note-edit-form ref="noteEditForm" @updateInfo="getNotes"></note-edit-form>
   </div>
 </template>
 
 <script>
 import Notes from "./Notes";
 import CategoryBar from "./CategoryBar";
+import NoteEditForm from "./NoteEditForm";
 export default {
   name: "Bookshelf",
-  components:{Notes, CategoryBar},
+  components:{Notes, CategoryBar, NoteEditForm},
   data() {
     return {
 
@@ -28,6 +30,23 @@ export default {
           }
 
         })
+    },
+
+    handledEditInfo(noteInfo) {
+      this.$refs.noteEditForm.dialogFormVisible = true
+      this.$refs.noteEditForm.isCreate = false
+      this.$refs.noteEditForm.form = noteInfo
+    },
+
+    handleAddNote(){
+      this.$refs.noteEditForm.dialogFormVisible = true
+      this.$refs.noteEditForm.isCreate = true
+      this.$refs.noteEditForm.form = {}
+      this.$refs.noteEditForm.cid = this.$refs.categoryBar.currentCid
+    },
+
+    handleEditCategory(){
+      this.$refs.categoryBar.edit()
     }
   }
 }

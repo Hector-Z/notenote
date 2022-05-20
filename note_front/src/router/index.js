@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+// import HelloWorld from '@/components/HelloWorld'
 import Register from "../components/Register";
 import Login from "../components/Login";
 import Home from "../components/home/Home";
 import Index from "../components";
 import Bookshelf from "../components/bookshelf/Bookshelf";
+import Test from "../components/bookshelf/test";
+import NoteEdit from "../components/note/NoteEdit";
 
 Vue.use(Router)
 
@@ -42,7 +44,17 @@ export default new Router({
           name: 'Bookshelf',
           component: Bookshelf,
         },
+        {
+          path: '/note/edit',
+          name: 'NoteEdit',
+          component: NoteEdit,
+        },
       ]
+    },
+    {
+      path: '/test',
+      name: 'Test',
+      component: Test,
     },
   ]
 })
